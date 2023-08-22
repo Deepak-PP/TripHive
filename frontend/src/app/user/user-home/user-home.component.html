@@ -1,0 +1,61 @@
+<div class="relative">
+    <div class="absolute top-0 w-full">
+        <app-user-nav></app-user-nav>
+    </div>
+    <div class="h-screen bg-gray-600">
+        <div
+            class="text-container absolute top-1/4 left-10 md:top-1/3 md:left-1/3 lg:left-1/2 xl:top-1/3 xl:left-32 p-1 text-white">
+            <p
+                class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-5xl font-mono font-semibold text-amber-700 text-opacity-60">
+                Let's Enjoy The<br> Wonders of<br> Nature
+            </p>
+            <p class="text-sm sm:text-base md:text-lg lg:text-xl xl:text-lg text-black font-mono font-semibold">
+                Pick your place, Get your guide, Explore!
+            </p>
+        </div>
+
+       
+        
+        <img src="../../../assets/images/hero_1.jpg" alt="Main Image" class="h-full w-full object-cover">
+    </div>
+</div>
+<div class="bg-amber-50 flex justify-around">
+    <div class="mt-20 ">
+        <p class="font-mono font-bold text-3xl text-amber-600">Why TripHive?</p>
+        <p class="font-mono font-semibold sm:text-sm lg:text-lg  pt-5">
+            Welcome to TripHive, your gateway to exciting adventures and unforgettable<br> travel experiences! <br>Discover the world like
+            never before with our unique platform designed to<br> connect you with local<br> trip groups in your favorite destinations.
+        </p>
+
+    </div>
+    <div class="flex-shrink">
+        <img src="../../../assets/images/ourstoryImage.jpg" alt="" class="h-96 lg:w-96 object-cover  rounded-full opacity-80 sm:py-1 lg:py-5 my-7 sm:mx-3 lg:mx-8 ">
+    </div>
+  
+</div>
+<div class="bg-amber-50 h-auto py-8">
+    <div>
+        <p class="font-mono font-bold text-3xl text-amber-600 text-center py-9 ">Your Journey Starts here...</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-8 px-44">
+        <!-- Place 1 Card -->
+        <div (click)="locationPage(location._id)" *ngFor="let location of locations" class="bg-white p-4 relative  rounded shadow-md max-w-sm custom-h-120 flex flex-col">
+            
+            <img [src]="location.image" alt="Place 1" class="h-full w-full object-cover rounded" >
+            <p
+                class="absolute top-0 left-0 w-full h-full flex items-end pb-4 justify-center text-white font-bold text-xl bg-black bg-opacity-30 rounded">
+                {{location.locationName}}
+            </p>
+           
+            <!-- Your content for Place 1 here -->
+        </div>
+
+        <!-- Place 2 Card -->
+       
+    </div>
+</div>
+
+
+
+
+

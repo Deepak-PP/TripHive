@@ -1,0 +1,50 @@
+<!-- Agency Details -->
+<div class="bg-white shadow-md rounded-lg p-4">
+    <h2 class="text-2xl font-bold mb-4 text-indigo-400">Agency Details</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Agency Name -->
+        <div>
+            <label class="block text-gray-700 font-bold mb-2">Agency Name</label>
+            <p class="text-gray-900">{{ requestData.agencyName }}</p>
+        </div>
+        <!-- Email -->
+        <div>
+            <label class="block text-gray-700 font-bold mb-2">Email</label>
+            <p class="text-gray-900">{{ requestData.email }}</p>
+        </div>
+        <!-- Guides -->
+        <div>
+            <label class="block text-gray-700 font-bold mb-2">Number of Guides</label>
+            <p class="text-gray-900">{{ requestData.noOfGuides }}</p>
+        </div>
+        <!-- Location -->
+        <div>
+            <label class="block text-gray-700 font-bold mb-2">Location</label>
+            <p class="text-gray-900">{{ requestData.location }}</p>
+        </div>
+        <!-- Services -->
+    <div class="col-span-2">
+  <label class="block text-gray-700 font-bold mb-2">Services</label>
+  <div class="flex flex-wrap -mx-4">
+    <ng-container *ngFor="let service of requestData.services">
+      <div class="w-1/2 px-4 mb-4">
+        <div class="bg-white shadow-lg rounded-lg p-3">
+          <p class="text-orange-800 font-mono font-semibold">{{ service.serviceName }}</p>
+          <div class="w-32 h-32 bg-gray-200 rounded-md mt-2 flex items-center justify-center">
+            <img [src]="service.image" alt="Service Image" class="w-full h-full object-cover rounded-md">
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+    </div>
+<div class="flex justify-center my-6">
+    <button [ngClass]="{
+      'bg-green-700 hover:bg-green-600': !approved,
+      'bg-red-700 hover:bg-red-600': approved
+    }" class="text-white font-bold font-mono py-5 px-9 rounded" (click)="requestApproval(requestData.email)">
+        {{ approved ? 'Reject' : 'Accept' }}
+    </button>
+</div>
+</div>

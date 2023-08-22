@@ -1,0 +1,74 @@
+
+<body>
+    
+
+
+<div class="flex h-screen w-full items-center justify-center bg-gray-900 bg-cover bg-no-repeat"
+    style="background-image:url('../../../assets/images/loginimage9.jpg')">
+    >
+    <div class="rounded-xl bg-gray-800 bg-opacity-50 px-16 py-10 shadow-lg backdrop-blur-md max-sm:px-8">
+        <div class="text-white">
+            <div class="mb-8 flex flex-col items-center">
+                
+                   
+                <h1 class="mb-2 text-2xl">Welcome back!</h1>
+                <span class="text-gray-300">Enter Login Details</span>
+            </div>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()">
+                <div class="mb-4 text-lg">
+                    <input
+                        formControlName = "email" [ngClass]="{'is-invalid':submit && f.email.errors}" class="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                        type="text" name="email" placeholder="E-mail" />
+                        <div *ngIf="submit && f.email.errors" class="text-1xl text-red-600 text-left ml-1 pt-1">
+                            <div *ngIf="f.email.errors['required']">Please enter your E-mail</div>
+                            <div *ngIf="f.email.errors['pattern']">Invalid Email format</div>
+                        </div>
+                </div>
+
+                <div class="mb-4 text-lg">
+                    <input
+                        formControlName = "password" [ngClass]="{'is-invalid':submit && f.password.errors}" class="rounded-3xl border-none bg-yellow-400 bg-opacity-50 px-6 py-2 text-center text-inherit placeholder-slate-200 shadow-lg outline-none backdrop-blur-md"
+                        type="Password" name="name" placeholder="Password" />
+                        <div *ngIf="submit && f.password.errors" class="text-1xl text-red-600 text-left ml-1 pt-1">
+                            <div *ngIf="f.password.errors['required']">Enter your password</div>
+                            <div *ngIf="f.password.errors['pattern']">Invalid password format</div>
+                        </div>
+                        
+                </div>
+                
+                <div class="mt-8 flex justify-center text-lg text-black">
+                    <button type="submit"
+                        class="rounded-3xl bg-yellow-400 bg-opacity-50 px-10 py-2 text-white shadow-xl backdrop-blur-md transition-colors duration-300 hover:bg-yellow-600">Login</button>
+                </div>
+                <div class="text-center my-1 mt-3 mb-3 text-gray-400 hover:underline hover:text-gray-100">
+                    <a>Don't have an Account?</a> <button [routerLink]="['/userRegister']" class="text-gray-100 ml-2">Sign Up</button>
+                    
+                </div>
+                
+             
+
+
+                <div *ngIf="errorMessage" class="text-orange-700 text-center font-mono font-bold text-lg mt-2">{{errorMessage}}</div>
+
+            
+            </form>
+            <div class="flex items-center justify-center mt-4">
+                <button (click)="signInGoogle()"
+                    class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-2 border border-gray-300 rounded-full shadow flex items-center text-sm">
+                    <a title="Google Inc., Public domain, via Wikimedia Commons"
+                        href="https://commons.wikimedia.org/wiki/File:Google_%22G%22_Logo.svg">
+                        <img width="20" alt="Google &quot;G&quot; Logo"
+                            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png">
+                    </a>
+                    <span class="ml-1">Login with Google</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+</body>

@@ -1,0 +1,33 @@
+<div class="bg-amber-50 w-full h-screen">
+  <div class="max-w-md mx-auto py-11">
+    <h2 class="text-2xl font-semibold mb-4">Add Service Details</h2>
+
+    <form #activityForm="ngForm" (ngSubmit)="submitForm(activityForm)" >
+      <div class="mb-4">
+      <label for="serviceName" class="block text-sm font-medium text-gray-700">Service Name</label>
+      <select id="serviceName" name="serviceName" ngModel class="mt-1 p-2 w-60 border rounded-md" required>
+        <option value="" disabled>Select a service</option>
+        <option *ngFor="let service of registeredServices" [ngvalue]="service">{{ service.serviceName }}</option>
+      </select>
+    </div>
+
+        <div class="mb-4">
+            <label for="startTime" class="block text-sm font-medium text-gray-700">Start Time</label>
+            <input type="time" id="startTime" name="startTime" ngModel class="mt-1 p-2 w-60 border rounded-md"
+                required>
+        </div>
+
+        <div class="mb-4">
+            <label for="endTime" class="block text-sm font-medium text-gray-700">End Time</label>
+            <input type="time" id="endTime" name="endTime" ngModel class="mt-1 p-2 w-60 border rounded-md" required>
+        </div>
+        <div class="mb-4">
+          <label for="Description" class="block text-sm font-medium text-gray-700">Description about the service</label>
+          <textarea id="Description" name="Description" ngModel class="mt-1 p-2 w-60 border rounded-md resize-none" rows="4"
+            required></textarea>
+        </div>
+
+        <button type="submit" class="bg-amber-500 text-white px-4 py-2 rounded-md hover:bg-amber-600">Save Details</button>
+    </form>
+</div>
+</div>

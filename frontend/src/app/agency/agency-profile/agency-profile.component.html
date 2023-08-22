@@ -1,0 +1,138 @@
+
+
+<div class="bg-gray-100 min-h-screen">
+
+    <div class="py-10 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <div class="bg-white shadow-sm rounded-lg p-6">
+            <div class="flex items-center justify-end">
+            
+               
+            
+            </div>
+            <h1 class="text-3xl font-bold mb-6 text-emerald-700 font-mono underline">Agency Profile</h1>
+
+<form [formGroup]="profileImageForm" (ngSubmit)="profileImageSubmit()">
+    <input type="file" formControlName="profileImage" name="profileImage" (change)="onProfileImageSelected($event)">
+    <div *ngIf="imagePreviewUrl" class="mt-2">
+        <img [src]="imagePreviewUrl" alt="Preview" class="w-32 h-32 object-contain">
+    </div>
+    <button type="submit" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Upload
+        Image</button>
+</form>
+
+
+
+            
+
+            <form [formGroup]="agencyForm" (ngSubmit)="onFormSubmit()" enctype="multipart/form-data">
+                
+                        <div class="mb-6">
+                            <label for="agencyName" class="block text-gray-700 text-sm font-bold mb-2">Agency Name</label>
+                            <input type="text" id="agencyName" formControlName="agencyName" placeholder=""
+                                class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50">
+                        
+                        </div>
+                      
+
+               
+            
+
+                <div class="mb-6">
+                    <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                    <input type="email" id="email" formControlName="email" placeholder="Enter email"
+                        class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50">
+                </div>
+
+                <div class="mb-6">
+                    <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Max Capacity</label>
+                    <input type="text" id="capacity" formControlName="capacity" placeholder="Enter the no of guides you provide"
+                        class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50">
+                </div>
+                <div class="mb-6">
+                    <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Price per person</label>
+                    <input type="text" id="pricePerHead" formControlName="pricePerHead" placeholder="Enter the no of guides you provide"
+                        class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50">
+                </div>
+                <div class="mb-6">
+                    <label for="location" class="block text-gray-700 text-sm font-bold mb-2">Location of service</label>
+                    <input type="text" id="location" formControlName="location" placeholder="" [ngClass]="{'is-invalid':submit && f['location'].errors}"
+                        class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50">
+                        <div *ngIf="submit" class="text-1xl text-red-600 text-left ml-1 pt-1">
+                            <div *ngIf="f['location'].errors">You must specify location</div>
+                        
+                        </div>
+                </div>
+               
+
+                <!-- Dynamic Services -->
+            <div formArrayName="services">
+                <div *ngFor="let service of serviceControls.controls; let i = index" class="mb-6">
+                    <div class="flex space-x-4">
+                        <div class="flex-1">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Service {{ i + 1 }}</label>
+                            <input type="text" [formControl]="getServiceNameControl(i)" placeholder="Enter service name"
+                                class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50">
+                        </div>
+                        <div class="flex-1">
+                            <!-- Display the image preview from servicesData -->
+                            <img *ngIf="servicesData[i]?.imagePreview" [src]="servicesData[i].imagePreview" alt="Service Image"
+                                class="w-20 h-20 mt-2 rounded-lg shadow">
+                        </div>
+            
+                        <div class="flex-1">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">Image for Service {{ i + 1 }}</label>
+                            <input type="file" (change)="onFileSelected($event, i)" accept="image/*" multiple name="image{{ i }}"
+                                class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50 mt-2">
+                        </div>
+            
+                        <!-- Add the fields for start time and end time -->
+                       
+                    </div>
+                    <div class="flex items-center">
+                        <button type="button" (click)="removeService(i)"
+                            class="text-red-500 ml-4 focus:outline-none">Remove</button>
+                    </div>
+                </div>
+            </div>
+
+                
+                <div class="mt-6">
+                    <button type="button" (click)="addService()" class="px-4 py-2 text-white bg-blue-500 rounded-lg">Add
+                        Service</button>
+                </div>
+
+            <div formArrayName="otherServices" class="mt-5">
+                <div *ngFor="let otherService of otherServicesField.controls; let i = index" class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Other Service {{ i + 1 }}</label>
+                    <div class="flex space-x-4">
+                        <input type="text" [formControl]="getOtherServiceNameControl(i)" placeholder="Enter other service name"
+                            class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50">
+                        <button type="button" (click)="removeOtherService(i)"
+                            class="text-red-500 ml-4 focus:outline-none">Remove</button>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6">
+                <button type="button" (click)="addOtherService()" class="px-4 py-2 text-white bg-blue-500 rounded-lg">Add
+                  other Services</button>
+            </div>
+
+                <!-- End Dynamic Services -->
+                <div *ngIf="adminApproved">
+                <div class="mt-8">
+                    <button type="submit"
+                        class="w-full px-6 py-3 bg-blue-500 rounded-lg text-white font-bold hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Update
+                        Profile</button>
+                </div>
+                </div>
+                <div *ngIf="!adminApproved">
+                    <div class="mt-8">
+                        <button type="submit"
+                            class="w-full px-6 py-3 bg-blue-500 rounded-lg text-white font-bold hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Request access</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
