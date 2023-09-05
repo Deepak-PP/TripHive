@@ -21,7 +21,7 @@ function initializeSocket(server) {
 
     socket.on("chatMessage", (message) => {
       console.log(message, "message");
-      socket.in(message.to).emit("message recieved", message);
+      socket.in(message.to).emit("newmessage", message);
     });
 
     socket.on("disconnect", () => {

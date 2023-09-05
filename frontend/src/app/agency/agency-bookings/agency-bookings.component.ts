@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { agencyService } from '../agency.service';
+import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 import { response } from 'express';
 
 @Component({
@@ -9,26 +11,35 @@ import { response } from 'express';
 })
 export class AgencyBookingsComponent implements OnInit {
   agencyToken: string = '';
-  bookingData:any
+  bookingData: any;
 
-  constructor(private agencyService: agencyService) {}
+  constructor(
+    private agencyService: agencyService,
+    private datePipe: DatePipe,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    
     this.fetchBookingDetails();
+  }
+
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return this.datePipe.transform(date, 'dd-MM-yyyy'); // Customize the format as you need
   }
 
   fetchBookingDetails() {
     this.agencyService.getbookingDetails().subscribe(
-      (response) => { 
+      (response) => {
         console.log(response);
-        this.bookingData = response
-        
-
+        this.bookingData = response;
       },
-      (error) => { 
-
-      })
-    
+      (error) => {
+        console.log(error);
+        
+      }
+    );
   }
+
+
 }

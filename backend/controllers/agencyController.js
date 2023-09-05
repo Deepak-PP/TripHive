@@ -3,11 +3,14 @@ const Booking = require("../models/booking")
 const Location = require("../models/location");
 const ServiceTime = require("../models/servicesTime")
 const sendEMail = require("../util/sendEmail");
+const Connection = require("../models/connection");
+const Message = require("../models/message");
 const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 const Token = require("../models/token");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
+const { ObjectId } = require("mongodb");
 
 const agencyRegister = async (req, res) => {
   try {
@@ -424,21 +427,158 @@ const agencyProfileImageUpload = async (req, res) => {
 
 const getBookingData = async (req, res) => { 
   try {
-     console.log("herererebookinggggg", req.headers);
+     
      const token = req.headers.authorization.split(" ")[1];
-     console.log(token, "tokenrecievedd");
+  
      const decodedToken = jwt.verify(token, "secret");
      console.log(decodedToken, "decodedd");
 
      const agencyId = decodedToken.role === "agency" ? decodedToken._id : null;
     console.log(agencyId, "idd");
     
-    const bookingData = await Booking.find({ agencyName: agencyId });
+    const bookingData = await Booking.find({ agencyName: agencyId })
+      .populate("userName")
+      .populate("agencyName")
     console.log(bookingData, "bookingdataatata");
     res.json(bookingData);
 
     
   } catch (error) {
+    
+  }
+}
+
+const getAgencyChat = async (req, res) => { 
+  try {
+    console.log("here");
+    const token = req.headers.authorization?.split(" ")[1];
+    const claims = jwt.verify(token, "secret");
+    if (!claims) {
+      return res.status(401).send({
+        message: "unauthenticated",
+      });
+    }
+    const agencyConnection = await Connection.find({
+      "connections.agency": claims._id,
+    }).populate("connections.user");
+    if (agencyConnection) {
+      console.log(agencyConnection, "data fetched");
+      res.json({ data: agencyConnection, id: claims._id });
+    }
+    
+  } catch (error) {
+    console.log(error);
+    
+  }
+
+  
+}
+
+const findChat = async (req, res) => {
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+    const userId = req.query.id;
+    const claims = jwt.verify(token, "secret");
+    if (!claims) {
+      return res.status(401).send({
+        message: "unauthenticated",
+      });
+    }
+    const agencyId = claims._id;
+    const findconnection = await Connection.findOne({
+      "connections.user": userId,
+      "connections.agency": agencyId,
+    });
+    if (findconnection) {
+      const allmessages = await Message.find({
+        connectionid: findconnection._id,
+      }).sort("createdAt");
+      res.json({
+        result: allmessages,
+        cid: findconnection._id,
+        prof: findconnection.connections.agency,
+      });
+    } else {
+      res.status(404);
+    }
+
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const message = async (req, res) => { 
+  try {
+    console.log("reached message");
+    const datas = req.body;
+    console.log(datas,"req.body");
+    const result = new Message({
+      connectionid: datas.connectionid,
+      from: datas.from,
+      to: datas.to,
+      message: datas.message,
+    });
+    const data = await result.save();
+    console.log(data,"backendmessagedatatata");
+    res.json(data);
+    
+    
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
+const getDashCountData = async (req, res) => { 
+  try {
+    console.log("doc countcoutncoutnsklfjhsdlkj");
+     const token = req.headers.authorization?.split(" ")[1];
+     const claims = jwt.verify(token, "secret");
+     if (!claims) {
+       return res.status(401).send({
+         message: "unauthenticated",
+       });
+    }
+    const agencyId = claims._id
+    const bookingData = await Booking.find({ agencyName: agencyId }).populate('userName').populate('agencyName')
+    console.log(bookingData,"this is the booking data of this agency");                                                                                                 
+    const bookingCount = await Booking.countDocuments({ agencyName: agencyId });
+    console.log(bookingCount, "countcounty");
+    const agencyData = await Agency.findById({ _id: agencyId });
+   
+    const result = await Booking.aggregate([
+      {
+        $match: {
+          agencyName: new mongoose.Types.ObjectId(agencyId), // Convert agencyId to ObjectId
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          totalAmount: { $sum: "$totalAmount" },
+        },
+      },
+    ]).exec();
+
+    if (result.length === 0) {
+      console.log("herereached resultt");
+      return res
+        .status(404)
+        .json({ message: "No bookings found for the agency" });
+    }
+
+    const totalAmount = result[0].totalAmount;
+    console.log(totalAmount, "this is the total collection ");
+
+    res
+      .status(200)
+      .json({ totalAmount, bookingCount, agencyData, bookingData });
+
+
+    
+  } catch (error) {
+     console.log("herereached errr");
+     console.error(error, "this is error");
     
   }
 }
@@ -453,4 +593,8 @@ module.exports = {
   serviceTimeData,
   agencyProfileImageUpload,
   getBookingData,
+  getAgencyChat,
+  findChat,
+  message,
+  getDashCountData,
 };

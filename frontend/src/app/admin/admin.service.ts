@@ -86,4 +86,12 @@ export class adminService implements CanActivate {
       withCredentials: true,
     });
   }
+
+  getDashboardCounts(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/admin/getcounts`);
+  }
+
+  getBookingData(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/admin/bookingData`)
+   }
 }

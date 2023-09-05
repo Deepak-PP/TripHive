@@ -25,7 +25,12 @@ agencyRoute.post(
   uploadSingleProfileImage,
   agencyControl.agencyProfileImageUpload
 );
-agencyRoute.get("/bookingDetails",agencyControl.getBookingData);
+agencyRoute.get("/bookingDetails", agencyControl.getBookingData);
+agencyRoute.get("/agencyChatList", agencyControl.getAgencyChat)
+agencyRoute.get("/findchat", agencyControl.findChat);
+agencyRoute.post("/message", agencyControl.message);
+agencyRoute.get("/getDashCount",agencyControl.getDashCountData);
+
 
 
 module.exports = agencyRoute

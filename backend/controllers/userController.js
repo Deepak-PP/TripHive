@@ -2,9 +2,12 @@ const User = require("../models/user");
 const Location = require("../models/location")
 const Agency = require("../models/agency");
 const Booking = require("../models/booking")
+const Connection = require('../models/connection')
+const Message = require('../models/message')
 const bcrypt = require("bcrypt");
 const Token = require("../models/token");
 const sendEMail = require("../util/sendEmail");
+const { ObjectId } = require("mongodb");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const jwtDecode = require("jwt-decode");
@@ -401,6 +404,133 @@ const userBookingDataFetch = async (req, res) => {
   }
 }
 
+const userChats = async (req, res) => { 
+  try {
+    console.log("here");
+    const agencyId = req.query.id
+     const token = req.headers.authorization?.split(" ")[1];
+     const claims = jwt.verify(token, "secret");
+     if (!claims) {
+       return res.status(401).send({
+         message: "unauthenticated",
+       });
+    }
+    const userConnection = await Connection.find({
+      "connections.user": claims._id,
+      "connections.agency": agencyId,
+    }).populate("connections.agency");
+    if (userConnection ) {
+      console.log(userConnection, "data fetched");
+      res.json({ data: userConnection, id: claims._id });
+
+    }
+    
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
+const allMessages = async (req, res) => { 
+  try {
+     const token = req.headers.authorization?.split(" ")[1];
+     const agencyId = req.query.id;
+     const claims = jwt.verify(token, "secret");
+     if (!claims) {
+       return res.status(401).send({
+         message: "unauthenticated",
+       });
+    }
+    
+    const userId = claims._id;
+    console.log(userId,agencyId);
+    const findconnection = await Connection.findOne({
+      "connections.user": userId,
+      "connections.agency": agencyId,
+    })
+      .populate("connections.agency")
+      .populate("connections.user");
+     if (findconnection) {
+       const allmessages = await Message.find({
+         connectionid: findconnection._id,
+       }).sort("createdAt");
+       res.json({
+         result: allmessages,
+         cid: findconnection._id,
+         userid: findconnection.connections.user,
+       });
+     } else {
+       res.status(404);
+     }
+
+    
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
+const addMessage = async (req, res) => { 
+  try {
+    const datas = req.body;
+    const result = new Message({
+      connectionid: datas.connectionid,
+      from: datas.from,
+      to: datas.to,
+      message: datas.message,
+    });
+    const data = await result.save();
+    res.json(data);
+    
+    
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
+const connectionMake = async (req, res) => { 
+  try {
+    const token = req.headers.authorization?.split(" ")[1];
+    const claims = jwt.verify(token, "secret");
+    const agencyId = req.query.id
+    
+     const connection = {
+       user: new ObjectId(claims._id),
+       agency: new ObjectId(agencyId),
+    };
+   
+    if (!claims) {
+      return res.status(401).send({
+        message: "unauthenticated",
+      });
+    }
+    const userConnection = await Connection.findOne({
+      "connections.user": claims._id,
+      "connections.agency": agencyId,
+    }).populate("connections.agency");
+    if (userConnection) {
+      
+      res.status(200).json({ newConnection: userConnection, status: true });
+    } else { 
+     
+      const newConnection = new Connection({
+        connections: {
+          user: connection.user,
+          agency: connection.agency,
+        },
+      });
+      await newConnection.save();
+      res.status(200).json({ newConnection, status: true });
+    }
+
+    
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
 
 
 module.exports = {
@@ -416,4 +546,8 @@ module.exports = {
   paymentVerify,
   getBookingData,
   userBookingDataFetch,
+  userChats,
+  allMessages,
+  addMessage,
+  connectionMake,
 };

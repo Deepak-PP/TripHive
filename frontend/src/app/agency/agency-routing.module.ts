@@ -9,6 +9,7 @@ import { AgencyProfileComponent } from './agency-profile/agency-profile.componen
 import { agencyService } from './agency.service';
 import { ServicesTimeComponent } from './services-time/services-time.component';
 import { AgencyBookingsComponent } from './agency-bookings/agency-bookings.component';
+import { ChatsComponent } from './chats/chats.component';
 
 
 
@@ -35,6 +36,7 @@ const routes: Routes = [
     component: AgentEmailVerifyComponent,
     canActivate: [agencyService],
   },
+  {path:'chats',component:ChatsComponent}
 ];
 
 

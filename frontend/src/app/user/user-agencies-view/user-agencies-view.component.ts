@@ -1,6 +1,6 @@
-import { Component,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { userService } from '../user.service';
@@ -11,9 +11,9 @@ import { userService } from '../user.service';
   styleUrls: ['./user-agencies-view.component.css'],
 })
 export class UserAgenciesViewComponent implements OnInit {
-  
   requestData: any;
   requestId: any;
+  searchTerm: string = ''; // Property to store the search term
 
   constructor(
     private route: ActivatedRoute,
@@ -30,6 +30,7 @@ export class UserAgenciesViewComponent implements OnInit {
       this.fetchLocationDatas();
     });
   }
+
   getImageUrl(imagePath: string): string {
     // Assuming this.userService.baseUrl is the base URL of your API
     return `${this.userService.baseUrl}/uploads/${imagePath}`;
@@ -42,7 +43,6 @@ export class UserAgenciesViewComponent implements OnInit {
         this.requestData = response;
         console.log(this.requestData, 'response');
         const agencyData = this.requestData.agencies;
-      
         this.requestData.image = `${this.userService.baseUrl}/uploads/${this.requestData.image}`;
       });
   }

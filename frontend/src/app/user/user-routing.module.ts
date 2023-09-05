@@ -10,6 +10,7 @@ import { UserServicesListComponent } from './user-services-list/user-services-li
 import { UserBookingComponent } from './user-booking/user-booking.component';
 import { UserBookingSummaryComponent } from './user-booking-summary/user-booking-summary.component';
 import { UserBookingsListComponent } from './user-bookings-list/user-bookings-list.component';
+import { UserGuard, UserGuardLet } from '../guards/user.guard';
 import { UserChatComponent } from './user-chat/user-chat.component';
 
 
@@ -19,17 +20,17 @@ const routes: Routes = [
   {
     path: 'userLogin',
     component: UserLoginComponent,
-    canActivate: [userService],
+    canActivate: [UserGuard],
   },
   {
     path: 'userRegister',
     component: UserRegisterComponent,
-    canActivate: [userService],
+    canActivate: [UserGuard],
   },
   {
     path: ':id/verify/:token',
     component: EmailVerifyComponent,
-    canActivate: [userService],
+    canActivate: [UserGuard],
   },
   { path: 'locationDetail/:id', component: UserAgenciesViewComponent },
   { path: 'servcieDetail/:id', component: UserServicesListComponent },
@@ -37,9 +38,18 @@ const routes: Routes = [
   {
     path: 'bookingSummary/:agencyId/:bookingId',
     component: UserBookingSummaryComponent,
+    canActivate: [UserGuardLet],
   },
-  { path: 'listBookings', component: UserBookingsListComponent },
-  {path:'chat',component:UserChatComponent}
+  {
+    path: 'listBookings',
+    component: UserBookingsListComponent,
+    canActivate: [UserGuardLet],
+  },
+  {
+    path: 'chat/:id',
+    component: UserChatComponent,
+    canActivate: [UserGuardLet],
+  },
 ];
 
 

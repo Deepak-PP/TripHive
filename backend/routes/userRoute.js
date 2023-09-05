@@ -18,7 +18,11 @@ userRoute.get("/getAgencyData/:id", userControl.getAgencyDataservcies);
 userRoute.post("/submitBooking", userControl.postBookingData);
 userRoute.post("/verifyPayment", userControl.paymentVerify);
 userRoute.get("/bookingData/:id", userControl.getBookingData);
-userRoute.get("/getBookingDetails",userControl.userBookingDataFetch);
+userRoute.get("/getBookingDetails", userControl.userBookingDataFetch);
+userRoute.get("/userchat", userControl.userChats);
+userRoute.get("/allmessages", userControl.allMessages);
+userRoute.post("/message", userControl.addMessage);
+userRoute.post("/makeConnection",userControl.connectionMake);
 
 
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { userService } from '../user.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { response } from 'express';
 
 @Component({
@@ -15,7 +16,7 @@ export class UserNavComponent implements OnInit {
   showProfileDropdown: boolean = false;
   menubardown: boolean = false;
 
-  constructor(private userAuthService: userService, private http: HttpClient) {
+  constructor(private userAuthService: userService, private http: HttpClient,private router:Router) {
     this.isLoggedIn = this.userAuthService.isAuthenticated();
   }
 
@@ -50,5 +51,6 @@ export class UserNavComponent implements OnInit {
     this.userAuthService.removeToken();
     this.authenticated = false;
     this.showProfileDropdown = !this.showProfileDropdown;
+    this.router.navigate(['/'])
   }
 }

@@ -41,7 +41,7 @@
                         <td class="px-4 py-3 text-sm border">{{data.agencyName.agencyName}}</td>
                         <td class="px-4 py-3 text-sm border">{{formatDate(data.dateOfTravel)}}</td>
                         <td class="px-4 py-3 text-sm border">
-                            <button class="px-3 py-1 text-red-700 bg-orange-200 rounded">CHAT</button>
+                            <button (click)="chat(data.agencyName._id)" class="px-3 py-1 text-red-700 bg-orange-200 rounded">CHAT</button>
                         </td>
                     </tr>
                     
@@ -50,3 +50,5 @@
         </div>
     </div>
 </section>
+
+<app-user-footer></app-user-footer>

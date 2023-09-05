@@ -9,7 +9,10 @@ const bodyParser = require("body-parser");
 
 
 
+
 const app = express();
+const http = require("http").createServer(app);
+const initializeSocket = require("./socket/socket");
 app.use("/uploads", express.static("uploads"));
 
 app.use(
@@ -35,10 +38,18 @@ mongoose
   })
   .then(() => {
     console.log("Connected to the database");
-    app.listen(5020, () => {
-      console.log("App is listening on port 5020");
-    });
-  })
+})
   .catch((error) => {
     console.error("Failed to connect to the database:", error);
   });
+
+   const server = http.listen(5020, () => {
+     console.log("App is listening on port 5020");
+   });
+
+   // app.listen(5020, () => {
+   //   console.log("App is listening on port 5020");
+   // });
+   initializeSocket(server);
+
+ 

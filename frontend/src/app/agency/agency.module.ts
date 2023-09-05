@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
+import { DatePipe } from '@angular/common';
 import { AgencyRoutingModule } from './agency-routing.module';
 import { AgencyDashComponent } from './agency-dash/agency-dash.component';
 import { AgencyLoginComponent } from './agency-login/agency-login.component';
@@ -19,6 +20,9 @@ import { agencyService } from './agency.service';
 import { AgencyInterceptor } from './agency.interceptor';
 import { ServicesTimeComponent } from './services-time/services-time.component';
 import { AgencyBookingsComponent } from './agency-bookings/agency-bookings.component';
+import { ChatsComponent } from './chats/chats.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { ContactsComponent } from './chats/contacts/contacts.component';
 
 
 
@@ -34,6 +38,8 @@ import { AgencyBookingsComponent } from './agency-bookings/agency-bookings.compo
     AgencyLayoutComponent,
     ServicesTimeComponent,
     AgencyBookingsComponent,
+    ChatsComponent,
+    ContactsComponent,
   ],
   imports: [
     RouterModule,
@@ -43,6 +49,7 @@ import { AgencyBookingsComponent } from './agency-bookings/agency-bookings.compo
     HttpClientModule,
     AgencyRoutingModule,
     CloudinaryModule,
+    SocketIoModule.forRoot({ url: 'http://localhost:4200' }),
   ],
   providers: [
     agencyService,
@@ -51,6 +58,7 @@ import { AgencyBookingsComponent } from './agency-bookings/agency-bookings.compo
       useClass: AgencyInterceptor,
       multi: true,
     },
+    DatePipe,
   ],
 })
 export class AgencyModule {}

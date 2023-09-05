@@ -14,8 +14,6 @@
             </p>
         </div>
 
-       
-        
         <img src="../../../assets/images/hero_1.jpg" alt="Main Image" class="h-full w-full object-cover">
     </div>
 </div>
@@ -23,15 +21,18 @@
     <div class="mt-20 ">
         <p class="font-mono font-bold text-3xl text-amber-600">Why TripHive?</p>
         <p class="font-mono font-semibold sm:text-sm lg:text-lg  pt-5">
-            Welcome to TripHive, your gateway to exciting adventures and unforgettable<br> travel experiences! <br>Discover the world like
-            never before with our unique platform designed to<br> connect you with local<br> trip groups in your favorite destinations.
+            Welcome to TripHive, your gateway to exciting adventures and unforgettable<br> travel experiences!
+            <br>Discover the world like
+            never before with our unique platform designed to<br> connect you with local<br> trip groups in your
+            favorite destinations.
         </p>
 
     </div>
     <div class="flex-shrink">
-        <img src="../../../assets/images/ourstoryImage.jpg" alt="" class="h-96 lg:w-96 object-cover  rounded-full opacity-80 sm:py-1 lg:py-5 my-7 sm:mx-3 lg:mx-8 ">
+        <img src="../../../assets/images/ourstoryImage.jpg" alt=""
+            class="h-96 lg:w-96 object-cover  rounded-full opacity-80 sm:py-1 lg:py-5 my-7 sm:mx-3 lg:mx-8 ">
     </div>
-  
+
 </div>
 <div class="bg-amber-50 h-auto py-8">
     <div>
@@ -39,23 +40,21 @@
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mt-8 px-44">
         <!-- Place 1 Card -->
-        <div (click)="locationPage(location._id)" *ngFor="let location of locations" class="bg-white p-4 relative  rounded shadow-md max-w-sm custom-h-120 flex flex-col">
-            
-            <img [src]="location.image" alt="Place 1" class="h-full w-full object-cover rounded" >
+        <div (click)="locationPage(location._id)" *ngFor="let location of locations"
+            class="bg-white p-4 relative  rounded shadow-md max-w-sm custom-h-120 flex flex-col">
+            <img [src]="location.image" alt="Place 1" class="h-full w-full object-cover rounded">
             <p
                 class="absolute top-0 left-0 w-full h-full flex items-end pb-4 justify-center text-white font-bold text-xl bg-black bg-opacity-30 rounded">
                 {{location.locationName}}
             </p>
-           
+
             <!-- Your content for Place 1 here -->
         </div>
 
         <!-- Place 2 Card -->
-       
+        <!-- Add more location cards as needed -->
     </div>
 </div>
 
-
-
-
-
+<!-- Footer Section -->
+<app-user-footer></app-user-footer>

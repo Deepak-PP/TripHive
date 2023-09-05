@@ -8,7 +8,9 @@ import {
   Router,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Socket } from 'ngx-socket-io';
 import Swal from 'sweetalert2';
+import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
  const httpOptions = {
    headers: new HttpHeaders({
      withCredentials: true.toString(),
@@ -21,9 +23,12 @@ import Swal from 'sweetalert2';
 export class agencyService implements CanActivate {
   baseUrl = 'http://localhost:5020';
   private tokenKey = 'agencyjwt';
-  
 
-  constructor(private http: HttpClient,private router:Router) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private socket: Socket
+  ) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -55,15 +60,13 @@ export class agencyService implements CanActivate {
     return !!token;
   }
 
-   
-
   getAgencyData(token): Observable<any> {
-     const httpOptions2 = {
-       headers: new HttpHeaders({
-         withCredentials: true.toString(),
-         'Authorization': `Bearer ${token}`,
-       }),
-     };
+    const httpOptions2 = {
+      headers: new HttpHeaders({
+        withCredentials: true.toString(),
+        Authorization: `Bearer ${token}`,
+      }),
+    };
 
     return this.http.get<any>(
       `${this.baseUrl}/agency/agencyData`,
@@ -109,16 +112,37 @@ export class agencyService implements CanActivate {
     );
   }
 
-  timeDataSubmit(timeData: object): Observable<any> { 
-    return this.http.post(`${this.baseUrl}/agency/agencyServiceTime`,timeData)
+  timeDataSubmit(timeData: object): Observable<any> {
+    return this.http.post(`${this.baseUrl}/agency/agencyServiceTime`, timeData);
   }
 
-  profileImageUpload(formData: any): Observable<any> { 
-    return this.http.post(`${this.baseUrl}/agency/profileImageAgency`,formData)
+  profileImageUpload(formData: any): Observable<any> {
+    return this.http.post(
+      `${this.baseUrl}/agency/profileImageAgency`,
+      formData
+    );
   }
 
   getbookingDetails(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/agency/bookingDetails`)
+    return this.http.get(`${this.baseUrl}/agency/bookingDetails`);
+  }
 
+  agencyChatList(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/agency/agencyChatList`);
+  }
+
+  chatBlock(id: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/agency/findchat?id=${id}`);
+  }
+
+  sendMessage(data: object): Observable<any> {
+    return this.http.post(`${this.baseUrl}/agency/message`, data);
+  }
+  getNewMessage(): Observable<string> {
+    return this.socket.fromEvent<string>('newmessage');
+  }
+
+  getDashboardCount(): Observable<any> { 
+    return this.http.get(`${this.baseUrl}/agency/getDashCount`)
   }
 }

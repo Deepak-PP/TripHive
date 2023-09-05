@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 import { RouterModule } from '@angular/router';
-import { IgxCarouselModule, IgxSliderModule } from 'igniteui-angular';
+
 import { DatePipe } from '@angular/common';
 
 
@@ -26,10 +26,14 @@ import { UserServicesListComponent } from './user-services-list/user-services-li
 import { UserBookingComponent } from './user-booking/user-booking.component';
 import { UserBookingSummaryComponent } from './user-booking-summary/user-booking-summary.component';
 import { UserBookingsListComponent } from './user-bookings-list/user-bookings-list.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { ToastrModule } from 'ngx-toastr';
 
 import { UserChatComponent } from './user-chat/user-chat.component';
 
 import { ContactComponent } from './user-chat/contact/contact.component';
+import { UserFooterComponent } from './user-footer/user-footer.component';
+import { AgencyFilterPipe } from './agency-filter.pipe';
 
 
 @NgModule({
@@ -46,6 +50,8 @@ import { ContactComponent } from './user-chat/contact/contact.component';
     UserBookingsListComponent,
     UserChatComponent,
     ContactComponent,
+    UserFooterComponent,
+    AgencyFilterPipe,
   ],
   imports: [
     RouterModule,
@@ -59,9 +65,8 @@ import { ContactComponent } from './user-chat/contact/contact.component';
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-    
-    IgxCarouselModule,
-    IgxSliderModule,
+    SocketIoModule.forRoot({ url: 'http://localhost:4200' }),
+    ToastrModule.forRoot(),
   ],
 
   providers: [

@@ -1,6 +1,8 @@
 const Admin = require("../models/admin");
 const Agency = require("../models/agency");
 const Location = require("../models/location")
+const Booking = require("../models/booking")
+const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const Token = require("../models/token");
 const jwt = require("jsonwebtoken");
@@ -88,9 +90,52 @@ const locationDataPost = async (req, res) => {
   }
 }
 
+const getDashCounts = async (req, res) => { 
+  try {
+    const bookingCount = await Booking.find().countDocuments();
+    const userCount = await User.find().countDocuments();
+    const agencyCount = await Agency.find().countDocuments()
+    const locationCount = await Location.find().countDocuments();
+
+    const counts = {
+      bookingCount,
+      userCount,
+      agencyCount,
+      locationCount,
+    };
+
+    res.status(200).json({ status: true, counts });
+    
+    
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
+const getBookingData = async (req, res) => { 
+  try {
+    Booking.find()
+      .sort({ createdAt: -1 })
+      .populate("userName")
+      .populate("agencyName")
+      .then((result) => {
+        res.status(200).json({ status: true, result });
+      })
+      .catch((error) => {
+       console.log(error);
+      });
+    
+  } catch (error) {
+    
+  }
+}
+
 module.exports = {
   postLoginAdmin,
   getAgencyData,
   getAgencyApprove,
-  locationDataPost
+  locationDataPost,
+  getDashCounts,
+  getBookingData,
 };

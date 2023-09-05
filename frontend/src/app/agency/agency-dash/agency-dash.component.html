@@ -1,1 +1,191 @@
-<p>agency-dash works!</p>
+<div class="container-fluid">
+    <div>
+        <div class="bg-white mt-3 p-3 rounded-md">
+            <h3 class="text-3xl font-medium text-gray-700">Dashboard</h3>
+        </div>
+
+        <div class="mt-4">
+            <div class="flex flex-wrap">
+                <div class="w-full px-6 sm:w-1/2 xl:w-1/3">
+                    <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
+                        <div class="p-3 bg-indigo-600 bg-opacity-75 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="2em"
+                            viewBox="0 0 576 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                            <path
+                                d="M249.6 471.5c10.8 3.8 22.4-4.1 22.4-15.5V78.6c0-4.2-1.6-8.4-5-11C247.4 52 202.4 32 144 32C93.5 32 46.3 45.3 18.1 56.1C6.8 60.5 0 71.7 0 83.8V454.1c0 11.9 12.8 20.2 24.1 16.5C55.6 460.1 105.5 448 144 448c33.9 0 79 14 105.6 23.5zm76.8 0C353 462 398.1 448 432 448c38.5 0 88.4 12.1 119.9 22.6c11.3 3.8 24.1-4.6 24.1-16.5V83.8c0-12.1-6.8-23.3-18.1-27.6C529.7 45.3 482.5 32 432 32c-58.4 0-103.4 20-123 35.6c-3.3 2.6-5 6.8-5 11V456c0 11.4 11.7 19.3 22.4 15.5z" />
+                        </svg>
+                        </div>
+
+                        <div class="mx-5">
+                            <h4 class="text-2xl font-semibold text-gray-700">
+                                {{bookingsCount}}
+                            </h4>
+                            <div class="text-gray-500">Total bookings</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 sm:mt-0">
+                    <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
+                        <div class="p-3 bg-blue-600 bg-opacity-75 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="2em"
+                                viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                <path
+                                    d="M320 96H192L144.6 24.9C137.5 14.2 145.1 0 157.9 0H354.1c12.8 0 20.4 14.2 13.3 24.9L320 96zM192 128H320c3.8 2.5 8.1 5.3 13 8.4C389.7 172.7 512 250.9 512 416c0 53-43 96-96 96H96c-53 0-96-43-96-96C0 250.9 122.3 172.7 179 136.4l0 0 0 0c4.8-3.1 9.2-5.9 13-8.4zm84 88c0-11-9-20-20-20s-20 9-20 20v14c-7.6 1.7-15.2 4.4-22.2 8.5c-13.9 8.3-25.9 22.8-25.8 43.9c.1 20.3 12 33.1 24.7 40.7c11 6.6 24.7 10.8 35.6 14l1.7 .5c12.6 3.8 21.8 6.8 28 10.7c5.1 3.2 5.8 5.4 5.9 8.2c.1 5-1.8 8-5.9 10.5c-5 3.1-12.9 5-21.4 4.7c-11.1-.4-21.5-3.9-35.1-8.5c-2.3-.8-4.7-1.6-7.2-2.4c-10.5-3.5-21.8 2.2-25.3 12.6s2.2 21.8 12.6 25.3c1.9 .6 4 1.3 6.1 2.1l0 0 0 0c8.3 2.9 17.9 6.2 28.2 8.4V424c0 11 9 20 20 20s20-9 20-20V410.2c8-1.7 16-4.5 23.2-9c14.3-8.9 25.1-24.1 24.8-45c-.3-20.3-11.7-33.4-24.6-41.6c-11.5-7.2-25.9-11.6-37.1-15l0 0-.7-.2c-12.8-3.9-21.9-6.7-28.3-10.5c-5.2-3.1-5.3-4.9-5.3-6.7c0-3.7 1.4-6.5 6.2-9.3c5.4-3.2 13.6-5.1 21.5-5c9.6 .1 20.2 2.2 31.2 5.2c10.7 2.8 21.6-3.5 24.5-14.2s-3.5-21.6-14.2-24.5c-6.5-1.7-13.7-3.4-21.1-4.7V216z" />
+                            </svg>
+                        </div>
+
+                        <div class="mx-5">
+                            <h4 class="text-2xl font-semibold text-gray-700">
+                                {{totalAmount}}
+                            </h4>
+                            <div class="text-gray-500">Total Collection</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
+                    <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
+                        <div class="p-3 bg-pink-600 bg-opacity-75 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="2em"
+                                viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                <path
+                                    d="M215.7 499.2C267 435 384 279.4 384 192C384 86 298 0 192 0S0 86 0 192c0 87.4 117 243 168.3 307.2c12.3 15.3 35.1 15.3 47.4 0zM192 128a64 64 0 1 1 0 128 64 64 0 1 1 0-128z" />
+                            </svg>
+                        </div>
+
+                        <div class="mx-5">
+                            <h4 class="text-2xl font-semibold text-gray-700">
+                                {{agencyData.location}}
+                            </h4>
+                            <div class="text-gray-500">Place of service</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full px-6 mt-6 sm:w-1/2 xl:w-1/3 xl:mt-0">
+                    <div class="flex items-center px-5 py-6 bg-white rounded-md shadow-sm">
+                        <div class="p-3 bg-pink-600 bg-opacity-75 rounded-full">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="2em"
+                                viewBox="0 0 640 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                                <path
+                                    d="M144 0a80 80 0 1 1 0 160A80 80 0 1 1 144 0zM512 0a80 80 0 1 1 0 160A80 80 0 1 1 512 0zM0 298.7C0 239.8 47.8 192 106.7 192h42.7c15.9 0 31 3.5 44.6 9.7c-1.3 7.2-1.9 14.7-1.9 22.3c0 38.2 16.8 72.5 43.3 96c-.2 0-.4 0-.7 0H21.3C9.6 320 0 310.4 0 298.7zM405.3 320c-.2 0-.4 0-.7 0c26.6-23.5 43.3-57.8 43.3-96c0-7.6-.7-15-1.9-22.3c13.6-6.3 28.7-9.7 44.6-9.7h42.7C592.2 192 640 239.8 640 298.7c0 11.8-9.6 21.3-21.3 21.3H405.3zM224 224a96 96 0 1 1 192 0 96 96 0 1 1 -192 0zM128 485.3C128 411.7 187.7 352 261.3 352H378.7C452.3 352 512 411.7 512 485.3c0 14.7-11.9 26.7-26.7 26.7H154.7c-14.7 0-26.7-11.9-26.7-26.7z" />
+                            </svg>
+                        </div>
+
+                        <div class="mx-5">
+                            <h4 class="text-2xl font-semibold text-gray-700">
+                                {{agencyData.maxCapacity}}
+                            </h4>
+                            <div class="text-gray-500">Max Capacity</div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="mt-8"></div>
+
+        <div class="flex flex-col mt-8 py-5">
+            <div class="py-2 -my-2 overflow-x-auto sm:px-6 lg:px-8">
+                <div
+                    class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
+                    <table class="min-w-full">
+                        <thead>
+                            <tr>
+                                <th
+                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                    Name
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                    E-mail
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                    Booked Date
+                                </th>
+                                
+                                <th
+                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                    Capacity
+                                </th>
+                                <th
+                                    class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50">
+                                    Amount
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white">
+                            <tr *ngFor="let datas of pagedBookingData">
+                                <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <div class="text-sm  leading-5 text-gray-900">
+                                            {{datas.userName.name}}
+                                        </div>
+                                    </div>
+                                </td>
+
+                                <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+                                    <div class="text-sm font-medium leading-5 text-gray-900">
+                                        {{datas.userName.email}}
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+                                    <div class="text-sm leading-5 text-gray-900">
+                                        {{formatDate(datas.dateOfTravel)}}
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+                                    <div class="text-sm font-bold leading-5 text-gray-900">
+                                        {{datas.noOftravellers}}
+                                    </div>
+                                </td>
+                                
+                                <td class="px-6 py-4 border-b text-red-600 border-gray-200 whitespace-nowrap">
+                                    {{datas.totalAmount}}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-2 flex justify-end">
+                    <nav aria-label="Page navigation example">
+                        <ul class="inline-flex -space-x-px text-base h-10">
+                            <li>
+                                <button
+                                    class="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 "
+                                    [disabled]="currentPage===0 " (click)="previousPage()">
+                                    Previous
+                                </button>
+                            </li>
+                            <li>
+                                <a class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300"
+                                    [class.text-blue-600]="currentPage === totalPages"
+                                    [class.bg-blue-50]="currentPage === totalPages"
+                                    [class.hover:bg-blue-100]="currentPage !== totalPages"
+                                    [class.hover:text-blue-700]="currentPage !== totalPages"
+                                    [class.dark:bg-gray-700]="currentPage === totalPages"
+                                    [class.dark:border-gray-700]="currentPage === totalPages"
+                                    [class.dark:text-white]="currentPage === totalPages">
+                                    {{ currentPage+1 }}
+                                </a>
+                            </li>
+                            <li>
+                                <button
+                                    class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 "
+                                    [disabled]="currentPage === totalPages - 1" (click)="nextPage()">
+                                    Next
+                                </button>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

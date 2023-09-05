@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs";
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree, Router } from "@angular/router";
+import {  Router } from "@angular/router";
 import {
   Auth,
   GoogleAuthProvider,
@@ -29,24 +29,11 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root',
 })
-export class userService implements CanActivate {
+export class userService {
   baseUrl = 'http://localhost:5020';
   private tokenKey = 'userjwt';
 
   constructor(private http: HttpClient, private router: Router) {}
-
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): boolean {
-    if (this.isLoggedIn()) {
-      this.router.navigate(['/']);
-
-      return false;
-    } else {
-      return true;
-    }
-  }
 
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
@@ -103,64 +90,98 @@ export class userService implements CanActivate {
   }
 
   AuthLogin(provider: any) {
-    const app = initializeApp(environment.firebase)
+    const app = initializeApp(environment.firebase);
 
-    const auth = getAuth(app)
-    auth.languageCode = 'it'
+    const auth = getAuth(app);
+    auth.languageCode = 'it';
 
     return signInWithPopup(auth, provider)
       .then((result) => {
         console.log(result);
-        return result.user
-      
-      }).catch((error) => { 
-        console.log(error,"error");
-        
+        return result.user;
       })
-
+      .catch((error) => {
+        console.log(error, 'error');
+      });
   }
 
-  googleSignIn(data: any): Observable<any> { 
-    return this.http.post(`${this.baseUrl}/loginGoogle`, data, {withCredentials:true});
+  googleSignIn(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/loginGoogle`, data, {
+      withCredentials: true,
+    });
   }
 
   getLocationData(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/locations`)
-
+    return this.http.get<any>(`${this.baseUrl}/locations`);
   }
 
-  viewLocationDetails(id:any): Observable<any> { 
-    return this.http.get<any>(`${this.baseUrl}/locationDetails/${id}`)
-
+  viewLocationDetails(id: any): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/locationDetails/${id}`);
   }
 
-  getAgencyData(id: string): Observable<any> { 
-    return this.http.get<any>(`${this.baseUrl}/getAgencyData/${id}`)
+  getAgencyData(id: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/getAgencyData/${id}`);
   }
 
-  bookingSubmit(data:any):Observable<any> { 
+  bookingSubmit(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/submitBooking`, data, {
       withCredentials: true,
     });
   }
 
-  verifyPayment(data: any): Observable<any> { 
+  verifyPayment(data: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/verifyPayment`, data, {
-      withCredentials:true
-    })
+      withCredentials: true,
+    });
   }
 
   getBookingData(id: any): Observable<any> {
-    return this.http.get(`${this.baseUrl}/bookingData/${id}`)
-
+    return this.http.get(`${this.baseUrl}/bookingData/${id}`);
   }
 
   getUserBookingData(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/getBookingDetails`)
+    return this.http.get(`${this.baseUrl}/getBookingDetails`);
+  }
+
+  userchatlist(id:string) {
+    return this.http.get(`${this.baseUrl}/userchat?id=${id}`, httpOptions);
+  }
+
+  chatBlock(id: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/allmessages?id=${id}`, httpOptions);
+  }
+
+  sentMessage(data: object): Observable<any> {
+    return this.http.post(`${this.baseUrl}/message`, data, {
+      withCredentials: true,
+    });
+  }
+
+  chatConnection(id: string): Observable<any> { 
+    return this.http.post(
+      `${this.baseUrl}/makeConnection?id=${id}`,
+      httpOptions
+    );
+  }
+
+  notifySwal(message,title) { 
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer);
+          toast.addEventListener('mouseleave', Swal.resumeTimer);
+        },
+      });
+
+      Toast.fire({
+        icon: title,
+        title: message,
+      });
 
   }
 
-
-
-  
 }

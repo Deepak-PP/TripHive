@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms'; 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
+import { DatePipe } from '@angular/common';
 
 import { AdminDashComponent } from './admin-dash/admin-dash.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
@@ -47,6 +48,7 @@ import { AdminInterceptor } from './admin.interceptor';
       useClass: AdminInterceptor,
       multi: true,
     },
+    DatePipe,
   ],
 })
 export class AdminModule {}
