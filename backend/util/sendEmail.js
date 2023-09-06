@@ -8,11 +8,11 @@ module.exports = async (email, subject, text) => {
     const transport = nodemailer.createTransport({
       host: `sandbox.smtp.mailtrap.io`,
       service: `Gmail`,
-      port: `587`,
+      port: process.env.PORT_NODEMAILER,
       secure: true,
       auth: {
-        user: `deepakdeepthi98@gmail.com`,
-        pass: `dpdfmucawqwbxokz`,
+        user: process.env.USER,
+        pass: process.env.MAIL_PASS,
       },
       mail: {
         // This property is new.

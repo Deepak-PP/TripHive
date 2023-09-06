@@ -1,3 +1,4 @@
+require("dotenv").config();
 const User = require("../models/user");
 const Location = require("../models/location")
 const Agency = require("../models/agency");
@@ -18,7 +19,7 @@ const { read } = require("fs");
 
 const postReg = async (req, res) => {
   try {
-   
+
     let email = req.body.email;
     let name = req.body.displayname;
     let password = req.body.password;
@@ -39,7 +40,7 @@ const postReg = async (req, res) => {
           });
           const tokenData = await token.save();
 
-          const url = `http://localhost:4200/${user._id}/verify/${tokenData.token}`;
+          const url = `${process.env.FRONT_URL}/${user._id}/verify/${tokenData.token}`;
 
           await sendEMail(user.email, "Verify Email", url);
           return res.json({ message: "Sent for verification" });
@@ -52,7 +53,7 @@ const postReg = async (req, res) => {
           });
           const tokenData = await token.save();
 
-          const url = `http://localhost:4200/${user._id}/verify/${tokenData.token}`;
+          const url = `${process.env.FRONT_URL}/${user._id}/verify/${tokenData.token}`;
 
           await sendEMail(user.email, "Verify Email", url);
           return res.json({ message: "Sent for verification" });
@@ -83,7 +84,7 @@ const postReg = async (req, res) => {
 
         console.log(tokenData, "this is tokken");
 
-        const url = `http://localhost:4200/${user._id}/verify/${tokenData.token}`;
+        const url = `${process.env.FRONT_URL}/${user._id}/verify/${tokenData.token}`;
 
         await sendEMail(user.email, "Verify Email", url);
 
@@ -144,7 +145,7 @@ const postLogin = async (req, res) => {
             })
             const tokenData = await token.save();
 
-            const url = `http://localhost:4200/${userData._id}/verify/${tokenData.token}`;
+            const url = `${process.env.FRONT_URL}/${userData._id}/verify/${tokenData.token}`;
             await sendEMail(userData.email, "Verify Email", url);
             return res.json({ message3: "Your account has not been verified. We have sent the verifivation link to your email" });
           } else{ 
@@ -156,7 +157,7 @@ const postLogin = async (req, res) => {
              });
              const tokenData = await token.save();
 
-             const url = `http://localhost:4200/${userData._id}/verify/${tokenData.token}`;
+             const url = `${process.env.FRONT_URL}/${userData._id}/verify/${tokenData.token}`;
              await sendEMail(userData.email, "Verify Email", url);
              return res.json({
                message3:
@@ -247,8 +248,9 @@ const googelLogin = async (req, res) => {
 
 const locationData = async (req, res) => {
   try {
-    console.log("sdjkfhsdkjfhsdjk");
+    console.log("location");
     const locationData = await Location.find({})
+    console.log(locationData,"sdjkfhsdkjfhsdjk");
   
     res.json(locationData)
     

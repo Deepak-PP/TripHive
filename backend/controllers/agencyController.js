@@ -34,7 +34,7 @@ const agencyRegister = async (req, res) => {
           });
           const tokenData = await token.save();
           console.log(tokenData);
-          const url = `http://localhost:4200/agencyVerify/${agency._id}/verify/${tokenData.token}`;
+          const url = `${process.env.FRONT_URL}/agencyVerify/${agency._id}/verify/${tokenData.token}`;
 
           await sendEMail(agency.email, "Verify Email", url);
           return res.json({
@@ -51,7 +51,7 @@ const agencyRegister = async (req, res) => {
            });
            const tokenData = await token.save();
            console.log(tokenData);
-           const url = `http://localhost:4200/agencyVerify/${agency._id}/verify/${tokenData.token}`;
+           const url = `${process.env.FRONT_URL}/agencyVerify/${agency._id}/verify/${tokenData.token}`;
 
            await sendEMail(agency.email, "Verify Email", url);
            return res.json({
@@ -84,7 +84,7 @@ const agencyRegister = async (req, res) => {
 
       console.log(tokenData, "this is tokken");
 
-      const url = `http://localhost:4200/agencyVerify/${agency._id}/verify/${tokenData.token}`;
+      const url = `${process.env.FRONT_URL}/agencyVerify/${agency._id}/verify/${tokenData.token}`;
 
       await sendEMail(agency.email, "Verify Email", url);
 
@@ -144,7 +144,7 @@ const agencyLogin = async (req, res) => {
             });
             const tokenData = await token.save();
 
-            const url = `http://localhost:4200/agencyVerify/${agencyData._id}/verify/${tokenData.token}`;
+            const url = `${process.env.FRONT_URL}/agencyVerify/${agencyData._id}/verify/${tokenData.token}`;
             await sendEMail(agencyData.email, "Verify Email", url);
             return res.json({
               message3:
@@ -159,7 +159,7 @@ const agencyLogin = async (req, res) => {
             });
             const tokenData = await token.save();
 
-            const url = `http://localhost:4200/agencyVerify/${agencyData._id}/verify/${tokenData.token}`;
+            const url = `${process.env.FRONT_URL}/agencyVerify/${agencyData._id}/verify/${tokenData.token}`;
             await sendEMail(agencyData.email, "Verify Email", url);
             return res.json({
               message3:
