@@ -19,7 +19,7 @@ app.use("/uploads", express.static("uploads"));
 app.use(
   cors({
     credentials: true,
-    origin: ["http://localhost:4200"],
+    origin: [process.env.FRONT_URL],
   })
 );
 
