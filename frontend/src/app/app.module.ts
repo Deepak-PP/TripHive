@@ -11,20 +11,35 @@ import { BadRequestComponent } from './errors/bad-request/bad-request.component'
 import { CommonErrorComponent } from './errors/common-error/common-error.component';
 import { InternalServerComponent } from './errors/internal-server/internal-server.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
+import { SpinnerComponent } from './loader/spinner/spinner.component';
+import { LoadingInterceptor } from './loader/loading.interceptor';
 
 //I keep the new line
 @NgModule({
-  declarations: [AppComponent, BadGatewayComponent, BadRequestComponent, CommonErrorComponent, InternalServerComponent, NotFoundComponent],
+  declarations: [
+    AppComponent,
+    BadGatewayComponent,
+    BadRequestComponent,
+    CommonErrorComponent,
+    InternalServerComponent,
+    NotFoundComponent,
+    SpinnerComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     RouterModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {
-}
+export class AppModule {}

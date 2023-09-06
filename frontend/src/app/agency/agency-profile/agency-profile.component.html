@@ -12,7 +12,7 @@
             <h1 class="text-3xl font-bold mb-6 text-emerald-700 font-mono underline">Agency Profile</h1>
 
 <form [formGroup]="profileImageForm" (ngSubmit)="profileImageSubmit()">
-    <input type="file" formControlName="profileImage" name="profileImage" (change)="onProfileImageSelected($event)">
+    <input type="file" appImageFileValidator formControlName="profileImage" name="profileImage" (change)="onProfileImageSelected($event)">
     <div *ngIf="imagePreviewUrl" class="mt-2">
         <img [src]="imagePreviewUrl" alt="Preview" class="w-32 h-32 object-contain">
     </div>
@@ -28,7 +28,7 @@
                 
                         <div class="mb-6">
                             <label for="agencyName" class="block text-gray-700 text-sm font-bold mb-2">Agency Name</label>
-                            <input type="text" id="agencyName" formControlName="agencyName" placeholder=""
+                            <input appNoLeadingSpace type="text" appNoLeadingSpace id="agencyName" formControlName="agencyName" placeholder=""
                                 class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50">
                         
                         </div>
@@ -39,23 +39,23 @@
 
                 <div class="mb-6">
                     <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                    <input type="email" id="email" formControlName="email" placeholder="Enter email"
+                    <input appNoLeadingSpace type="email" id="email" formControlName="email" placeholder="Enter email"
                         class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50">
                 </div>
 
                 <div class="mb-6">
                     <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Max Capacity</label>
-                    <input type="text" id="capacity" formControlName="capacity" placeholder="Enter the no of guides you provide"
+                    <input appNoLeadingSpace type="text" id="capacity" formControlName="capacity" placeholder="Enter the no of guides you provide"
                         class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50">
                 </div>
                 <div class="mb-6">
                     <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Price per person</label>
-                    <input type="text" id="pricePerHead" formControlName="pricePerHead" placeholder="Enter the no of guides you provide"
+                    <input appNoLeadingSpace type="text" id="pricePerHead" formControlName="pricePerHead" placeholder="Enter the no of guides you provide"
                         class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50">
                 </div>
                 <div class="mb-6">
                     <label for="location" class="block text-gray-700 text-sm font-bold mb-2">Location of service</label>
-                    <input type="text" id="location" formControlName="location" placeholder="" [ngClass]="{'is-invalid':submit && f['location'].errors}"
+                    <input appNoLeadingSpace type="text" id="location" formControlName="location" placeholder="" [ngClass]="{'is-invalid':submit && f['location'].errors}"
                         class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50">
                         <div *ngIf="submit" class="text-1xl text-red-600 text-left ml-1 pt-1">
                             <div *ngIf="f['location'].errors">You must specify location</div>
@@ -70,7 +70,7 @@
                     <div class="flex space-x-4">
                         <div class="flex-1">
                             <label class="block text-gray-700 text-sm font-bold mb-2">Service {{ i + 1 }}</label>
-                            <input type="text" [formControl]="getServiceNameControl(i)" placeholder="Enter service name"
+                            <input appNoLeadingSpace type="text" [formControl]="getServiceNameControl(i)" placeholder="Enter service name"
                                 class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50">
                         </div>
                         <div class="flex-1">
@@ -81,7 +81,7 @@
             
                         <div class="flex-1">
                             <label class="block text-gray-700 text-sm font-bold mb-2">Image for Service {{ i + 1 }}</label>
-                            <input type="file" (change)="onFileSelected($event, i)" accept="image/*" multiple name="image{{ i }}"
+                            <input appImageFileValidator type="file" (change)="onFileSelected($event, i)" accept="image/*" multiple name="image{{ i }}"
                                 class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50 mt-2">
                         </div>
             
@@ -105,7 +105,7 @@
                 <div *ngFor="let otherService of otherServicesField.controls; let i = index" class="mb-6">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Other Service {{ i + 1 }}</label>
                     <div class="flex space-x-4">
-                        <input type="text" [formControl]="getOtherServiceNameControl(i)" placeholder="Enter other service name"
+                        <input appNoLeadingSpace type="text" [formControl]="getOtherServiceNameControl(i)" placeholder="Enter other service name"
                             class="w-full px-4 py-3 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-opacity-50">
                         <button type="button" (click)="removeOtherService(i)"
                             class="text-red-500 ml-4 focus:outline-none">Remove</button>

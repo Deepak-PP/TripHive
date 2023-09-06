@@ -1,9 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { UserAgenciesViewComponent } from './user-agencies-view/user-agencies-view.component';
 
 @Pipe({
   name: 'agencyFilter',
 })
 export class AgencyFilterPipe implements PipeTransform {
+  constructor(private agencyViewComp:UserAgenciesViewComponent) { }
   transform(agencies: any[], searchTerm: string): any[] {
     if (!agencies || !searchTerm) {
       return agencies;
@@ -22,5 +24,15 @@ export class AgencyFilterPipe implements PipeTransform {
         agency.maxCapacity.toString().includes(searchTerm)
       );
     });
+
+    if (this.agencyViewComp.agencies.length === 0) {
+      return [
+        {
+          agencyName: 'No Data Found',
+        },
+      ];
+    }
+
+    return agencies;
   }
 }

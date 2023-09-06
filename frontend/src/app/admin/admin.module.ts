@@ -20,6 +20,7 @@ import { AdminViewAgenciesComponent } from './admin-view-agencies/admin-view-age
 import { adminService } from './admin.service';
 import { AdminLocationsComponent } from './admin-locations/admin-locations.component';
 import { AdminInterceptor } from './admin.interceptor';
+import { LoadingInterceptor } from '../loader/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,11 @@ import { AdminInterceptor } from './admin.interceptor';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AdminInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
       multi: true,
     },
     DatePipe,

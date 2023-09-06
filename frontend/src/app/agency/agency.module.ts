@@ -23,6 +23,8 @@ import { AgencyBookingsComponent } from './agency-bookings/agency-bookings.compo
 import { ChatsComponent } from './chats/chats.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ContactsComponent } from './chats/contacts/contacts.component';
+import { LoadingInterceptor } from '../loader/loading.interceptor';
+import { SharedModule } from '../sharedModules/sharedModule.module';
 
 
 
@@ -50,12 +52,18 @@ import { ContactsComponent } from './chats/contacts/contacts.component';
     AgencyRoutingModule,
     CloudinaryModule,
     SocketIoModule.forRoot({ url: 'http://localhost:4200' }),
+    SharedModule
   ],
   providers: [
     agencyService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AgencyInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
       multi: true,
     },
     DatePipe,

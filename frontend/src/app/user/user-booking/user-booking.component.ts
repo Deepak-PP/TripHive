@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { userService } from '../user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment.prod';
 import { response } from 'express';
 
 declare var Razorpay:any
@@ -115,7 +116,7 @@ export class UserBookingComponent implements OnInit {
         currency: 'INR',
         amount: this.totalAmount,
         name: 'TripHive.',
-        key: 'rzp_test_lwtr5pxn4HY6Gk',
+        key: environment.razorPayKey,
         image: '../../../assets/images/logotriphive.jpg',
         handler: (response: any) => {
           console.log(response);
@@ -144,8 +145,8 @@ export class UserBookingComponent implements OnInit {
         },
         prefill: {
           name: 'TripHive.',
-          email: 'deepakdeepthi98@gmail.com',
-          phone: '9400724739',
+          email: environment.persEmail,
+          phone: environment.persPhone,
         },
         theme: {
           color: '#f37254',

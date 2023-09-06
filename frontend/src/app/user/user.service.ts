@@ -1,7 +1,8 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs";
-import {  Router } from "@angular/router";
+import { Router } from "@angular/router";
+
 import {
   Auth,
   GoogleAuthProvider,
@@ -30,8 +31,10 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class userService {
-  baseUrl = 'http://localhost:5020';
-  private tokenKey = 'userjwt';
+  // baseUrl = 'http://localhost:5020';
+  baseUrl = environment.backendLink;
+
+  private tokenKey = environment.userTokenKey;
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -143,7 +146,7 @@ export class userService {
     return this.http.get(`${this.baseUrl}/getBookingDetails`);
   }
 
-  userchatlist(id:string) {
+  userchatlist(id: string) {
     return this.http.get(`${this.baseUrl}/userchat?id=${id}`, httpOptions);
   }
 
@@ -157,31 +160,29 @@ export class userService {
     });
   }
 
-  chatConnection(id: string): Observable<any> { 
+  chatConnection(id: string): Observable<any> {
     return this.http.post(
       `${this.baseUrl}/makeConnection?id=${id}`,
       httpOptions
     );
   }
 
-  notifySwal(message,title) { 
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer);
-          toast.addEventListener('mouseleave', Swal.resumeTimer);
-        },
-      });
+  notifySwal(message, title) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer);
+        toast.addEventListener('mouseleave', Swal.resumeTimer);
+      },
+    });
 
-      Toast.fire({
-        icon: title,
-        title: message,
-      });
-
+    Toast.fire({
+      icon: title,
+      title: message,
+    });
   }
-
 }

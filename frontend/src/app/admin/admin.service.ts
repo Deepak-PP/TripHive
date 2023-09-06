@@ -9,6 +9,7 @@ import {
   Router,
 } from '@angular/router';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment.prod';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -21,7 +22,7 @@ const httpOptions = {
 })
 export class adminService implements CanActivate {
   baseUrl = 'http://localhost:5020';
-  private tokenKey = 'adminjwt';
+  private tokenKey = environment.adminTokenKey;
   constructor(private http: HttpClient, private router: Router) {}
 
   canActivate(

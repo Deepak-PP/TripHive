@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { Socket } from 'ngx-socket-io';
 import Swal from 'sweetalert2';
 import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
+import { environment } from 'src/environments/environment.prod';
  const httpOptions = {
    headers: new HttpHeaders({
      withCredentials: true.toString(),
@@ -22,7 +23,7 @@ import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
 })
 export class agencyService implements CanActivate {
   baseUrl = 'http://localhost:5020';
-  private tokenKey = 'agencyjwt';
+  private tokenKey = environment.agencyTokenKey;
 
   constructor(
     private http: HttpClient,

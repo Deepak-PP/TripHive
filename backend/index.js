@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const mongoose = require("mongoose");
 const routes = require("./routes/userRoute");
 const adminRoutes = require("./routes/adminRoute")
@@ -33,12 +34,10 @@ app.use('/admin', adminRoutes);
 app.use('/agency',agencyRoutes)
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/tripHive", {
-    useNewUrlParser: true,
-  })
+  .connect(process.env.MONGOOSE_LINK)
   .then(() => {
     console.log("Connected to the database");
-})
+  })
   .catch((error) => {
     console.error("Failed to connect to the database:", error);
   });

@@ -34,6 +34,7 @@ import { UserChatComponent } from './user-chat/user-chat.component';
 import { ContactComponent } from './user-chat/contact/contact.component';
 import { UserFooterComponent } from './user-footer/user-footer.component';
 import { AgencyFilterPipe } from './agency-filter.pipe';
+import { LoadingInterceptor } from '../loader/loading.interceptor';
 
 
 @NgModule({
@@ -74,6 +75,11 @@ import { AgencyFilterPipe } from './agency-filter.pipe';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: UserInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
       multi: true,
     },
     DatePipe,

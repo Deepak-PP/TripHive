@@ -13,6 +13,7 @@ import { userService } from '../user.service';
 export class UserAgenciesViewComponent implements OnInit {
   requestData: any;
   requestId: any;
+  agencies:any[]
   searchTerm: string = ''; // Property to store the search term
 
   constructor(
@@ -44,6 +45,7 @@ export class UserAgenciesViewComponent implements OnInit {
         console.log(this.requestData, 'response');
         const agencyData = this.requestData.agencies;
         this.requestData.image = `${this.userService.baseUrl}/uploads/${this.requestData.image}`;
+        this.agencies = agencyData
       });
   }
 
