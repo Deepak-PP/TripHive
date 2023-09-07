@@ -21,7 +21,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class adminService implements CanActivate {
-  baseUrl = 'http://localhost:5020';
+  baseUrl = environment.backendLink;
   private tokenKey = environment.adminTokenKey;
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -93,6 +93,6 @@ export class adminService implements CanActivate {
   }
 
   getBookingData(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/admin/bookingData`)
-   }
+    return this.http.get(`${this.baseUrl}/admin/bookingData`);
+  }
 }

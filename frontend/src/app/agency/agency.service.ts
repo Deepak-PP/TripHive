@@ -22,7 +22,7 @@ import { environment } from 'src/environments/environment.prod';
   providedIn: 'root',
 })
 export class agencyService implements CanActivate {
-  baseUrl = 'http://localhost:5020';
+  baseUrl = environment.backendLink;
   private tokenKey = environment.agencyTokenKey;
 
   constructor(
@@ -143,7 +143,7 @@ export class agencyService implements CanActivate {
     return this.socket.fromEvent<string>('newmessage');
   }
 
-  getDashboardCount(): Observable<any> { 
-    return this.http.get(`${this.baseUrl}/agency/getDashCount`)
+  getDashboardCount(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/agency/getDashCount`);
   }
 }
