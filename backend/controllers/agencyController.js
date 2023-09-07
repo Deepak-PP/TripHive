@@ -203,7 +203,7 @@ const getAgencyData = async (req, res) => {
     const decodedToken = jwt.verify(token, "secret");
     console.log(decodedToken,"decodedd");
 
-    const agencyId = decodedToken.role === "agency" ? decodedToken._id : null;
+    const agencyId =  decodedToken._id
     console.log(agencyId,"idd");
     const agencyData = await Agency.findById({
       _id: agencyId,
