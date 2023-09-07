@@ -1,10 +1,11 @@
+require("dotenv").config();
 const socketIO = require("socket.io");
 
 function initializeSocket(server) {
   const io = socketIO(server, {
     pingTimeout: 60000,
     cors: {
-      origin: "http://localhost:4200",
+      origin: process.env.FRONT_URL,
     },
   });
 
@@ -30,7 +31,4 @@ function initializeSocket(server) {
   });
 }
 
-
-
-module.exports = initializeSocket
-
+module.exports = initializeSocket;
