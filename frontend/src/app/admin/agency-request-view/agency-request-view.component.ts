@@ -23,7 +23,7 @@ export class AgencyRequestViewComponent implements OnInit {
         console.log(this.requestData);
         
         this.requestData.services.forEach((service: any) => {
-          service.image =  `${this.adminService.baseUrl}/uploads/${service.image}`
+          service.image =  `${this.adminService.baseUrl}/uploads/${service.image[0]}`
           
         });
         

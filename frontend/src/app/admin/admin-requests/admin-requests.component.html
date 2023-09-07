@@ -46,6 +46,11 @@
                 </tr>
             </thead>
             <tbody class="bg-white">
+                <tr *ngIf="agencyData.length === 0">
+                    <td colspan="5" class="px-6 py-4 whitespace-no-wrap text-center border-b border-gray-500 text-sm font-sans font-semibold leading-5">
+                        Currently there are no new requests
+                    </td>
+                </tr>
                 <tr *ngFor="let item of agencyData;let i=index">
                     <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
                         <div class="flex items-center">

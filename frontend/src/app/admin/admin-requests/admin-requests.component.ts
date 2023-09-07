@@ -17,8 +17,8 @@ export class AdminRequestsComponent implements OnInit {
   }
 
   fetchAgencyData() {
-    this.adminService.agencyData().subscribe((response) => {
-      const data = [response];
+    this.adminService.agencyDataAll().subscribe((response) => {
+      const data = response;
       console.log(data);
 
       this.agencyData = data.filter(

@@ -164,7 +164,7 @@ export class AgencyProfileComponent {
 
       // Populate servicesData with image URLs from the backend
       for (let i = 0; i < data.services.length; i++) {
-        const imageFilename = data.services[i].image; // Assuming 'image' contains the image URL from the backend
+        const imageFilename = data.services[i].image[0]; // Assuming 'image' contains the image URL from the backend
         console.log(imageFilename, 'name of the image');
 
         const imagePreview = `${this.agencyService.baseUrl}/uploads/${imageFilename}`; // Construct the full image URL

@@ -14,8 +14,8 @@
         </div>
         <!-- Guides -->
         <div>
-            <label class="block text-gray-700 font-bold mb-2">Number of Guides</label>
-            <p class="text-gray-900">{{ requestData.noOfGuides }}</p>
+            <label class="block text-gray-700 font-bold mb-2">Maximum Capacity</label>
+            <p class="text-gray-900">{{ requestData.maxCapacity }}</p>
         </div>
         <!-- Location -->
         <div>
@@ -39,7 +39,7 @@
   </div>
 </div>
     </div>
-<div class="flex justify-center my-6">
+<div  class="flex justify-center my-6">
     <button [ngClass]="{
       'bg-green-700 hover:bg-green-600': !approved,
       'bg-red-700 hover:bg-red-600': approved

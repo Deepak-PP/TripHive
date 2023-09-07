@@ -10,7 +10,7 @@ import { adminService } from '../admin.service';
   styleUrls: ['./admin-view-agencies.component.css'],
 })
 export class AdminViewAgenciesComponent {
-  agencyData: any[] = [];
+  agencyData: any[]
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -22,10 +22,12 @@ export class AdminViewAgenciesComponent {
 
   fetchAgencyData() {
     this.adminService.agencyDataAll().subscribe((response) => {
-      const data = [response];
-      console.log(data);
+      const data = response
+      console.log(data,"agencydatahere");
 
       this.agencyData = data.filter((item: any) => item.adminApproved === true);
+      console.log(this.agencyData, 'agencydatahereveriofied');
+
     });
   }
 

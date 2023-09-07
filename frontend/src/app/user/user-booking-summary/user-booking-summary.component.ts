@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { userService } from '../user.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-user-booking-summary',
@@ -8,15 +9,15 @@ import { userService } from '../user.service';
   styleUrls: ['./user-booking-summary.component.css'],
 })
 export class UserBookingSummaryComponent implements OnInit {
-  agencyId: string
+  agencyId: string;
   bookingId: string;
-  agencyData: any
-  bookingData:any
-  
+  agencyData: any;
+  bookingData: any;
 
   constructor(
     private route: ActivatedRoute,
-    private userService: userService
+    private userService: userService,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -32,23 +33,24 @@ export class UserBookingSummaryComponent implements OnInit {
   fetchAgency(id: any) {
     this.userService.getAgencyData(id).subscribe((response) => {
       console.log(response);
-      this.agencyData = response
+      this.agencyData = response;
     });
   }
 
   fetchBooking(id: any) {
     this.userService.getBookingData(id).subscribe(
-      (response) => { 
+      (response) => {
         console.log(response);
-        this.bookingData = response
-        
-
+        this.bookingData = response;
       },
-      (error) => { 
+      (error) => {
         console.log(error);
-        
       }
-    )
+    );
+  }
 
+  formatDate(dateString: string): string {
+    const date = new Date(dateString);
+    return this.datePipe.transform(date, 'dd-MM-yyyy'); // Customize the format as you need
   }
 }
