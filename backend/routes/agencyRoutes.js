@@ -14,6 +14,7 @@ agencyRoute.post('/registerAgency', agencyControl.agencyRegister)
 agencyRoute.get("/agencyVerify/:id/verify/:token", agencyControl.agentEmailVerify);
 agencyRoute.post("/loginAgency", agencyControl.agencyLogin);
 agencyRoute.get("/agencyData", agencyControl.getAgencyData);
+agencyRoute.get("/agencyDataAll", agencyControl.agencyDataAll);
 agencyRoute.post(
   "/profileUpdate",
   uploadArray,

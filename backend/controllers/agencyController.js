@@ -222,6 +222,20 @@ const getAgencyData = async (req, res) => {
   }
 };
 
+const agencyDataAll = async (req, res) => { 
+  try {
+    const agencyData = await Agency.find()
+    res.json(agencyData);
+
+     if (!agencyData) {
+       return res.json({ message: "No agencies to view" });
+     }
+    
+  } catch (error) {
+    res.status(500).send({ message: "Internal server error" });
+  }
+}
+
 
 const agencyProfileUpdate = async (req, res) => {
   try {
@@ -589,6 +603,7 @@ module.exports = {
   agentEmailVerify,
   agencyLogin,
   getAgencyData,
+  agencyDataAll,
   agencyProfileUpdate,
   serviceTimeData,
   agencyProfileImageUpload,

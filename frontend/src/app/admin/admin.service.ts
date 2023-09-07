@@ -73,6 +73,9 @@ export class adminService implements CanActivate {
   agencyData(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/agency/agencyData`);
   }
+  agencyDataAll(): Observable<any> { 
+    return this.http.get<any>(`${this.baseUrl}/agency/agencyDataAll`);
+  }
 
   viewDetailsAgency(id: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/admin/viewAgency/${id}`);
