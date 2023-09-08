@@ -316,6 +316,7 @@ console.log("postbookingbefore");
             dateOfTravel: dateOfTravel,
             specialRequests: specialRequests,
             paymentStatus: paymentStatus,
+            bookingStatus:"processed",
           });
 
           const bookingData = await bookings.save();
@@ -374,8 +375,27 @@ const getBookingData = async (req, res) => {
     const id = req.params.id
     console.log(id);
     const bookingData = await Booking.findById({ _id: id })
+      .populate("userName")
+      .populate("agencyName");
 
     res.json( bookingData );
+    
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
+const getBookingView = async (req, res) => { 
+  try {
+    const date = req.query.date
+    console.log(date, "this is hte date");
+    const bookingData = await Booking.findOne ({ dateOfTravel: date })
+      .populate("agencyName")
+      .populate("userName");
+    console.log(bookingData);
+
+    res.json(bookingData);
     
   } catch (error) {
     console.log(error);
@@ -402,6 +422,31 @@ const userBookingDataFetch = async (req, res) => {
 
     
   } catch (error) {
+    
+  }
+}
+
+const bookingCancel = async (req, res) => { 
+  try {
+    const bookingId = req.query.id
+    const booking = await Booking.findById(bookingId);
+
+    if (!booking) {
+      return res.status(404).json({ message: "Booking not found" });
+    }
+
+    booking.bookingStatus = "cancelled"
+    await booking.save();
+
+    res.status(200).json({ message: "Booking canceled successfully" });
+
+    
+  } catch (error) {
+
+    console.error(error);
+    res
+      .status(500)
+      .json({ message: "An error occurred while canceling the booking" });
     
   }
 }
@@ -545,6 +590,7 @@ module.exports = {
   viewLocationDetail,
   getAgencyDataservcies,
   postBookingData,
+  bookingCancel,
   paymentVerify,
   getBookingData,
   userBookingDataFetch,
@@ -552,4 +598,5 @@ module.exports = {
   allMessages,
   addMessage,
   connectionMake,
+  getBookingView,
 };

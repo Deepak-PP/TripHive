@@ -35,6 +35,7 @@ import { ContactComponent } from './user-chat/contact/contact.component';
 import { UserFooterComponent } from './user-footer/user-footer.component';
 import { AgencyFilterPipe } from './agency-filter.pipe';
 import { LoadingInterceptor } from '../loader/loading.interceptor';
+import { UserBookingViewComponent } from './user-booking-view/user-booking-view.component';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { LoadingInterceptor } from '../loader/loading.interceptor';
     ContactComponent,
     UserFooterComponent,
     AgencyFilterPipe,
+    UserBookingViewComponent,
   ],
   imports: [
     RouterModule,

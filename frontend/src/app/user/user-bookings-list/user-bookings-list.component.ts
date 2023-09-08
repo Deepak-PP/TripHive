@@ -13,7 +13,11 @@ import { response } from 'express';
 export class UserBookingsListComponent implements OnInit {
   bookingData: any;
 
-  constructor(private userService: userService, private datePipe: DatePipe,private router:Router) {}
+  constructor(
+    private userService: userService,
+    private datePipe: DatePipe,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.fetchBookingData();
@@ -23,7 +27,9 @@ export class UserBookingsListComponent implements OnInit {
     this.userService.getUserBookingData().subscribe(
       (response) => {
         console.log(response);
-        this.bookingData = response;
+        this.bookingData = response.filter(
+          (booking) => booking.bookingStatus !== 'cancelled'
+        );
       },
       (error) => {}
     );
@@ -33,30 +39,52 @@ export class UserBookingsListComponent implements OnInit {
     return this.datePipe.transform(date, 'dd-MM-yyyy'); // Customize the format as you need
   }
 
-  chat(id: string) { 
-    console.log(id,"id got at the funciton");
-    
+  chat(id: string) {
+    console.log(id, 'id got at the funciton');
+
     if (this.userService.isLoggedIn) {
       this.userService.chatConnection(id).subscribe(
         (response) => {
           console.log(response);
-          
-          if (response) { 
+
+          if (response) {
             const jsonString = JSON.stringify(id);
             this.router.navigate(['/chat', id], {
               queryParams: { data: jsonString },
             });
-            
           }
         },
-        (error) => { 
+        (error) => {
           console.log(error);
-          
-        })
-
-    } else { 
-
+        }
+      );
+    } else {
     }
+  }
+
+  bookView(date: any) { 
+    this.userService.viewBookingDetail(date).subscribe(
+      (response) => { 
+        if (response) {
+          console.log(response, 'bookresponse');
+          const id = response._id;
+          console.log(id,"bookid");
+          
+          const jsonString = JSON.stringify(id);
+          this.router.navigate(['/viewBooking', id], {
+            queryParams: { data: jsonString },
+          });
+        } else { 
+          console.log("no res");
+          
+        }
+        
+      },
+      (error) => { 
+        console.log(error);
+        
+      }
+    )
 
   }
 }

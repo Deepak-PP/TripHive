@@ -80,6 +80,12 @@ export class userService {
     };
     return this.http.post(`${this.baseUrl}/user`, {}, httpOptionsGet);
   }
+  viewBookingDetail(date: any): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/viewBookingDetail?date=${date}`);
+  }
+  bookingCancel(id: any): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/cancelBooking?id=${id}`);
+  }
 
   emailVerifyUser(userId: string, token: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/${userId}/verify/${token}`);

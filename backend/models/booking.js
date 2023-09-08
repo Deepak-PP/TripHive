@@ -5,24 +5,24 @@ const bookingSchenma = Schema(
   {
     userName: {
       type: Schema.Types.ObjectId,
-       ref: "Users",
-     },
-     agencyName: {
-       type: Schema.Types.ObjectId,
-       ref: "Agency",
-     },
-     noOftravellers: {
-       type: Number,
-       required: true,
-     },
-     dateOfTravel: {
-       type: Date,
-       required: true,
-     },
-     specialRequests: {
-     type:String
-     }, 
-     paymentMethod: {
+      ref: "Users",
+    },
+    agencyName: {
+      type: Schema.Types.ObjectId,
+      ref: "Agency",
+    },
+    noOftravellers: {
+      type: Number,
+      required: true,
+    },
+    dateOfTravel: {
+      type: Date,
+      required: true,
+    },
+    specialRequests: {
+      type: String,
+    },
+    paymentMethod: {
       type: String,
       required: false,
     },
@@ -32,11 +32,13 @@ const bookingSchenma = Schema(
     },
     totalAmount: {
       type: Number,
-     
+    },
+    bookingStatus: {
+      type: String,
     },
     paymentId: {
-      type:String
-      }
+      type: String,
+    },
   },
   { timestamps: true }
 );

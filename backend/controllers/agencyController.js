@@ -563,7 +563,8 @@ const getDashCountData = async (req, res) => {
     const result = await Booking.aggregate([
       {
         $match: {
-          agencyName: new mongoose.Types.ObjectId(agencyId), // Convert agencyId to ObjectId
+          agencyName: new mongoose.Types.ObjectId(agencyId),
+          bookingStatus: { $ne: "cancelled" }, // Convert agencyId to ObjectId
         },
       },
       {

@@ -12,6 +12,7 @@ import { UserBookingSummaryComponent } from './user-booking-summary/user-booking
 import { UserBookingsListComponent } from './user-bookings-list/user-bookings-list.component';
 import { UserGuard, UserGuardLet } from '../guards/user.guard';
 import { UserChatComponent } from './user-chat/user-chat.component';
+import { UserBookingViewComponent } from './user-booking-view/user-booking-view.component';
 
 
 
@@ -50,6 +51,7 @@ const routes: Routes = [
     component: UserChatComponent,
     canActivate: [UserGuardLet],
   },
+  { path: 'viewBooking/:id',component:UserBookingViewComponent },
 ];
 
 

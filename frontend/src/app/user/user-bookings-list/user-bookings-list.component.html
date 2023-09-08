@@ -20,6 +20,7 @@
                         <th class="px-4 py-3">Agency</th>
                         <th class="px-4 py-3">Date</th>
                         <th class="px-4 py-3">Contact</th>
+                        <th class="px-4 py-3">Other actions</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white">
@@ -42,6 +43,9 @@
                         <td class="px-4 py-3 text-sm border">{{formatDate(data.dateOfTravel)}}</td>
                         <td class="px-4 py-3 text-sm border">
                             <button (click)="chat(data.agencyName._id)" class="px-3 py-1 text-red-700 bg-orange-200 rounded">CHAT</button>
+                        </td>
+                        <td class="px-4 py-3 text-sm border">
+                            <button (click)="bookView(data.dateOfTravel)" class="px-3 py-1 text-red-700 bg-orange-200 rounded">View Booking</button>
                         </td>
                     </tr>
                     
