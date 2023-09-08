@@ -13,6 +13,7 @@ import { InternalServerComponent } from './errors/internal-server/internal-serve
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { SpinnerComponent } from './loader/spinner/spinner.component';
 import { LoadingInterceptor } from './loader/loading.interceptor';
+import { ErrorInterceptor } from './error.interceptor';
 
 //I keep the new line
 @NgModule({
@@ -39,6 +40,11 @@ import { LoadingInterceptor } from './loader/loading.interceptor';
       useClass: LoadingInterceptor,
       multi: true,
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi:true
+    }
   ],
   bootstrap: [AppComponent],
 })

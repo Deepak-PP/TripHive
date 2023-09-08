@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { userService } from '../user.service';
@@ -25,29 +25,54 @@ export class UserRegisterComponent {
   emailsent = false;
   resend: Boolean = false;
   emailAlreadyRegistered = false;
-  signupForm = this.fb.group({
-    displayname: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern(/^[a-zA-Z ]*[a-zA-Z][a-zA-Z ]*$/),
+  signupForm = this.fb.group(
+    {
+      displayname: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^[a-zA-Z ]*[a-zA-Z][a-zA-Z ]*$/),
+        ],
       ],
-    ],
 
-    email: ['', [Validators.required, Validators.email]],
-    password: [
-      '',
-      [
-        Validators.required,
-        Validators.pattern(
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
-        ),
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+          ),
+        ],
       ],
-    ],
-  });
+      confirmPassword: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+          ),
+        ],
+      ],
+    },
+    {
+      validators: [this.passwordMatchValidator], // Add the custom validator here
+    }
+  );
 
   get f() {
     return this.signupForm.controls;
+  }
+
+  passwordMatchValidator(formGroup: FormGroup) {
+    const password = formGroup.get('password').value;
+    const confirmPassword = formGroup.get('confirmPassword').value;
+
+    if (password !== confirmPassword) {
+      formGroup.get('confirmPassword').setErrors({ notMatch: true });
+    } else {
+      formGroup.get('confirmPassword').setErrors(null);
+    }
   }
 
   onSubmit() {

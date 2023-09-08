@@ -21,6 +21,8 @@ import { adminService } from './admin.service';
 import { AdminLocationsComponent } from './admin-locations/admin-locations.component';
 import { AdminInterceptor } from './admin.interceptor';
 import { LoadingInterceptor } from '../loader/loading.interceptor';
+import { BadgeService } from './badge.service';
+import { ErrorInterceptor } from '../error.interceptor';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,13 @@ import { LoadingInterceptor } from '../loader/loading.interceptor';
       useClass: LoadingInterceptor,
       multi: true,
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
     DatePipe,
+    BadgeService,
   ],
 })
 export class AdminModule {}

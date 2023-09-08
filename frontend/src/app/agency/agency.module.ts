@@ -25,6 +25,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ContactsComponent } from './chats/contacts/contacts.component';
 import { LoadingInterceptor } from '../loader/loading.interceptor';
 import { SharedModule } from '../sharedModules/sharedModule.module';
+import { ErrorInterceptor } from '../error.interceptor';
 
 
 
@@ -52,7 +53,7 @@ import { SharedModule } from '../sharedModules/sharedModule.module';
     AgencyRoutingModule,
     CloudinaryModule,
     SocketIoModule.forRoot({ url: 'http://localhost:4200' }),
-    SharedModule
+    SharedModule,
   ],
   providers: [
     agencyService,
@@ -64,6 +65,11 @@ import { SharedModule } from '../sharedModules/sharedModule.module';
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
       multi: true,
     },
     DatePipe,

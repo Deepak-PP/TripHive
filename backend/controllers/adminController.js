@@ -131,6 +131,18 @@ const getBookingData = async (req, res) => {
   }
 }
 
+const getRequestCount = async (req, res) => { 
+  try {
+    console.log("herteerrecount");
+    const agencyPendingData = await Agency.countDocuments({adminApproved:false})
+    
+    res.json(agencyPendingData);
+  } catch (error) {
+    console.log(error);
+    
+  }
+}
+
 module.exports = {
   postLoginAdmin,
   getAgencyData,
@@ -138,4 +150,5 @@ module.exports = {
   locationDataPost,
   getDashCounts,
   getBookingData,
+  getRequestCount,
 };

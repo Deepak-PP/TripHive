@@ -23,7 +23,7 @@ const postReg = async (req, res) => {
     let email = req.body.email;
     let name = req.body.displayname;
     let password = req.body.password;
-    console.log(email, name, password);
+    
     const salt = await bcrypt.genSalt(10);
     const hashpassword = await bcrypt.hash(password, salt);
 

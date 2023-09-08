@@ -36,6 +36,7 @@ import { UserFooterComponent } from './user-footer/user-footer.component';
 import { AgencyFilterPipe } from './agency-filter.pipe';
 import { LoadingInterceptor } from '../loader/loading.interceptor';
 import { UserBookingViewComponent } from './user-booking-view/user-booking-view.component';
+import { ErrorInterceptor } from '../error.interceptor';
 
 
 @NgModule({
@@ -83,6 +84,11 @@ import { UserBookingViewComponent } from './user-booking-view/user-booking-view.
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,
       multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi:true
     },
     DatePipe,
   ],

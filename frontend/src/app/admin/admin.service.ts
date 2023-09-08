@@ -73,7 +73,7 @@ export class adminService implements CanActivate {
   agencyData(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/agency/agencyData`);
   }
-  agencyDataAll(): Observable<any> { 
+  agencyDataAll(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/agency/agencyDataAll`);
   }
 
@@ -97,5 +97,9 @@ export class adminService implements CanActivate {
 
   getBookingData(): Observable<any> {
     return this.http.get(`${this.baseUrl}/admin/bookingData`);
+  }
+
+  getPendingRequestsCount(): Observable<any> { 
+    return this.http.get(`${this.baseUrl}/admin/requestCount`);
   }
 }

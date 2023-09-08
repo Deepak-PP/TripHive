@@ -15,7 +15,8 @@ adminRoute.get("/viewAgency/:id", adminControl.getAgencyData)
 adminRoute.get("/approveAgency/:email", adminControl.getAgencyApprove)
 adminRoute.post("/locations", uploadSingle, adminControl.locationDataPost);
 adminRoute.get("/getcounts", adminControl.getDashCounts);
-adminRoute.get("/bookingData",adminControl.getBookingData);
+adminRoute.get("/bookingData", adminControl.getBookingData);
+adminRoute.get("/requestCount",adminControl.getRequestCount);
 
 
 module.exports = adminRoute

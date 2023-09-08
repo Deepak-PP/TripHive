@@ -84,6 +84,19 @@
                             <div *ngIf="f.password.errors['pattern']">Invalid password format</div>
                         </div>
                     </div>
+                    <div class="pb-2 pt-4">
+                        <input class="block w-full p-4 text-lg rounded-sm bg-black" type="password" name="confirmPassword" 
+                        id="confirmPassword"
+                        placeholder="Confirm Password"
+                        formControlName="confirmPassword" 
+                        [ngClass]="{'is-invalid': submit && f.confirmPassword.errors}"
+                        >
+                        <div *ngIf="submit && f.confirmPassword.errors" class="text-1xl text-red-600 text-left ml-1 pt-1">
+                            <div *ngIf="f.confirmPassword.errors['required']">Please confirm your password</div>
+                            <div *ngIf="f.confirmPassword.errors['pattern']">Invalid password confirmation</div>
+                            <div *ngIf="f.confirmPassword.errors['notMatch']">Passwords do not match</div>
+                        </div>
+                    </div>
                     <div class="text-center my-1 mb-3 text-gray-400 hover:underline hover:text-gray-100">
                         <!-- <a href="#">Forgot your password?</a> -->
                     </div>
