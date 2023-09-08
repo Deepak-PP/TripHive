@@ -69,7 +69,7 @@ import { ErrorInterceptor } from '../error.interceptor';
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-    SocketIoModule.forRoot({ url: 'http://localhost:4200' }),
+    SocketIoModule.forRoot({ url: environment.frontEndLink }),
     ToastrModule.forRoot(),
   ],
 
