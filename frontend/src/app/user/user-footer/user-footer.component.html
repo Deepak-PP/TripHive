@@ -1,21 +1,17 @@
 <footer class="bg-gray-900 text-white py-8">
-    <div class="container mx-auto flex justify-between">
-        <div class="w-1/4 pl-14">
-            <p class="font-mono font-semibold text-xl mb-4 ">About Us</p>
-            <p class="text-sm">Welcome to TripHive, your gateway to exciting adventures and unforgettable travel
-                experiences! Discover the world like never before with our unique platform designed to connect you with
-                local trip groups in your favorite destinations.</p>
+    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+        <div class="w-full md:w-1/4 text-center md:text-left mb-4 md:mb-0">
+            <p class="font-mono font-semibold text-2xl lg:pl-10 md:pl-8">TripHive.</p>
         </div>
-        <div class="w-1/4">
-            <p class="font-mono font-semibold text-xl mb-4">Quick Links</p>
+        <div class="w-full md:w-1/4 text-center md:text-left mb-4 md:mb-0">
+            <p class="font-mono font-semibold text-xl">Quick Links</p>
             <ul>
                 <li class="py-2"><a [routerLink]="['/']">Home</a></li>
                 <li><a [routerLink]="['/listBookings']">Bookings</a></li>
-
             </ul>
         </div>
-        <div class="w-1/4">
-            <p class="font-mono font-semibold text-xl mb-4">Contact Us</p>
+        <div class="w-full md:w-1/4 text-center md:text-left">
+            <p class="font-mono font-semibold text-xl mb-4 md:mb-0">Contact Us</p>
             <p class="text-sm">123 Main Street, City, Country</p>
             <p class="text-sm">Email: contact@triphive.com</p>
         </div>
