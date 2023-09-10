@@ -35,7 +35,11 @@ const routes: Routes = [
   },
   { path: 'locationDetail/:id', component: UserAgenciesViewComponent },
   { path: 'servcieDetail/:id', component: UserServicesListComponent },
-  { path: 'bookUser/:id', component: UserBookingComponent },
+  {
+    path: 'bookUser/:id',
+    component: UserBookingComponent,
+    canActivate: [UserGuardLet],
+  },
   {
     path: 'bookingSummary/:agencyId/:bookingId',
     component: UserBookingSummaryComponent,
@@ -51,7 +55,7 @@ const routes: Routes = [
     component: UserChatComponent,
     canActivate: [UserGuardLet],
   },
-  { path: 'viewBooking/:id',component:UserBookingViewComponent },
+  { path: 'viewBooking/:id', component: UserBookingViewComponent },
 ];
 
 
